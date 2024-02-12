@@ -33,8 +33,8 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calculate), label: 'Calculator'),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'About me'),
+              icon: Icon(Icons.calculate_rounded), label: 'Calculator'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'About me'),
         ],
       ),
     );
