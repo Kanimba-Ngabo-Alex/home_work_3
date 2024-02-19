@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_work_3/pages/navbar.dart';
 import 'package:home_work_3/pages/about.dart';
+import 'package:provider/provider.dart';
+import 'package:home_work_3/theme/theme_provider.dart';
 
 class Calculator extends StatefulWidget {
   @override
@@ -32,151 +34,174 @@ class _CalculatorState extends State<Calculator> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          'Calculator',
-          style: TextStyle(color: Colors.black),
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+      return Scaffold(
+        backgroundColor: themeProvider.themeData.backgroundColor,
+        appBar: AppBar(
+          title: const Text(
+            'Calculator',
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Colors.grey,
+          centerTitle: true,
         ),
-        backgroundColor: Colors.grey,
-      ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.white,
-          child: ListView(
+        drawer: Drawer(
+          child: Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return Container(
+                color: themeProvider.themeData.backgroundColor,
+                child: ListView(
+                  children: [
+                    DrawerHeader(
+                      child: Center(
+                        child: Text(
+                          'MENU',
+                          style: TextStyle(
+                            fontSize: 50,
+                            color: themeProvider
+                                .themeData.textTheme.bodyText1!.color,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.home),
+                      title: Text(
+                        'Home',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: themeProvider
+                              .themeData.textTheme.bodyText1!.color,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.person_2),
+                      title: Text(
+                        'About Me',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: themeProvider
+                              .themeData.textTheme.bodyText1!.color,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => UserAbout()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              DrawerHeader(
-                child: Center(
-                  child: Text(
-                    'MENU',
-                    style: TextStyle(fontSize: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      text,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: themeProvider
+                              .themeData.textTheme.bodyText1!.color,
+                          fontSize: 30),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  calcbutton('AC', Colors.black, Colors.white),
+                  calcbutton('+/-', Colors.black, Colors.white),
+                  calcbutton('%', Colors.black, Colors.white),
+                  calcbutton(
+                      '/', Color.fromARGB(255, 62, 110, 244), Colors.white),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  calcbutton('7', Colors.white, Colors.black),
+                  calcbutton('8', Colors.white, Colors.black),
+                  calcbutton('9', Colors.white, Colors.black),
+                  calcbutton(
+                      'x', Color.fromARGB(255, 62, 110, 244), Colors.white),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  calcbutton('4', Colors.white, Colors.black),
+                  calcbutton('5', Colors.white, Colors.black),
+                  calcbutton('6', Colors.white, Colors.black),
+                  calcbutton(
+                      '-', Color.fromARGB(255, 62, 110, 244), Colors.white),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  calcbutton('1', Colors.white, Colors.black),
+                  calcbutton('2', Colors.white, Colors.black),
+                  calcbutton('3', Colors.white, Colors.black),
+                  calcbutton(
+                      '+', Color.fromARGB(255, 62, 110, 244), Colors.white),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      calculation('0');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.fromLTRB(34, 20, 95, 20),
+                      shape: StadiumBorder(),
+                      primary: Colors.white,
+                    ),
+                    child: Text(
+                      "0",
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
                   ),
-                ),
+                  calcbutton('.', Colors.white, Colors.black),
+                  calcbutton(
+                      '=', Color.fromARGB(255, 62, 110, 244), Colors.white),
+                ],
               ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text(
-                  'Home',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.message),
-                title: Text(
-                  'About Me',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => UserAbout()));
-                },
-              )
             ],
           ),
         ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text(
-                    text,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(color: Colors.black, fontSize: 30),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                calcbutton('AC', Colors.black, Colors.white),
-                calcbutton('+/-', Colors.black, Colors.white),
-                calcbutton('%', Colors.black, Colors.white),
-                calcbutton(
-                    '/', Color.fromARGB(255, 62, 110, 244), Colors.white),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                calcbutton('7', Colors.white, Colors.black),
-                calcbutton('8', Colors.white, Colors.black),
-                calcbutton('9', Colors.white, Colors.black),
-                calcbutton(
-                    'x', Color.fromARGB(255, 62, 110, 244), Colors.white),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                calcbutton('4', Colors.white, Colors.black),
-                calcbutton('5', Colors.white, Colors.black),
-                calcbutton('6', Colors.white, Colors.black),
-                calcbutton(
-                    '-', Color.fromARGB(255, 62, 110, 244), Colors.white),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                calcbutton('1', Colors.white, Colors.black),
-                calcbutton('2', Colors.white, Colors.black),
-                calcbutton('3', Colors.white, Colors.black),
-                calcbutton(
-                    '+', Color.fromARGB(255, 62, 110, 244), Colors.white),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    calculation('0');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.fromLTRB(34, 20, 95, 20),
-                    shape: StadiumBorder(),
-                    primary: Colors.white,
-                  ),
-                  child: Text(
-                    "0",
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
-                ),
-                calcbutton('.', Colors.white, Colors.black),
-                calcbutton(
-                    '=', Color.fromARGB(255, 62, 110, 244), Colors.white),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+      );
+    });
   }
 
   dynamic text = '0';
