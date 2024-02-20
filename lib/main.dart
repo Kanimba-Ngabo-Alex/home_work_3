@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:home_work_3/pages/navbar.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+// import 'package:home_work_3/pages/login_page.dart';
+// import 'package:home_work_3/pages/sign_up.dart';
 
 void main() {
   DependecyInjection.init();
