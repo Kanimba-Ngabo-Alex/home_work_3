@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_work_3/pages/calc.dart';
 import 'package:home_work_3/pages/navbar.dart';
+import 'package:provider/provider.dart';
+import 'package:home_work_3/theme/theme_provider.dart';
 
 class UserAbout extends StatelessWidget {
   @override
@@ -12,46 +14,63 @@ class UserAbout extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.grey,
+        centerTitle: true,
       ),
       drawer: Drawer(
-        child: Container(
-          color: Colors.white,
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Center(
-                  child: Text(
-                    'MENU',
-                    style: TextStyle(fontSize: 50),
+        child: Consumer<ThemeProvider>(
+          builder: (context, themeProvider, child) {
+            return Container(
+              color: themeProvider.themeData.backgroundColor,
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    child: Center(
+                      child: Text(
+                        'MENU',
+                        style: TextStyle(
+                          fontSize: 50,
+                          color: themeProvider
+                              .themeData.textTheme.bodyText1!.color,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text(
+                      'Home',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color:
+                            themeProvider.themeData.textTheme.bodyText1!.color,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.calculate),
+                    title: Text(
+                      'Calculator',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color:
+                            themeProvider.themeData.textTheme.bodyText1!.color,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Calculator()),
+                      );
+                    },
+                  ),
+                ],
               ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text(
-                  'Home',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.calculate),
-                title: Text(
-                  'Calculator',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Calculator()),
-                  );
-                },
-              )
-            ],
-          ),
+            );
+          },
         ),
       ),
       body: Text(
