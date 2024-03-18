@@ -1,4 +1,4 @@
-import 'package:home_work_3/theme/theme.dart';
+import 'package:midsem/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {

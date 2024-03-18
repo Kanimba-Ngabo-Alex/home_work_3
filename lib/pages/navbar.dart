@@ -1,6 +1,6 @@
-import 'package:home_work_3/pages/about.dart';
-import 'package:home_work_3/pages/calc.dart';
-import 'package:home_work_3/pages/homecontent.dart';
+import 'package:midsem/pages/about.dart';
+import 'package:midsem/pages/calc.dart';
+import 'package:midsem/pages/homecontent.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "938535556878",
+    "project_id": "midsem-fa245",
+    "storage_bucket": "midsem-fa245.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938535556878:android:26c90617f7433819d3e95f",
+        "android_client_info": {
+          "package_name": "com.example.home_work_3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwkx94ivD08I3-j2KQ7SuAsk6vYGi4XtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938535556878:android:bbb352e6c9ee9521d3e95f",
+        "android_client_info": {
+          "package_name": "com.example.midsem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwkx94ivD08I3-j2KQ7SuAsk6vYGi4XtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

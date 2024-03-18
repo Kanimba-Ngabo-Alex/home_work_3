@@ -1,14 +1,13 @@
-import 'package:home_work_3/dependency_injection.dart';
-import 'package:home_work_3/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:home_work_3/pages/navbar.dart';
-import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:midsem/pages/authp.dart';
+import 'package:midsem/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
-// import 'package:home_work_3/pages/login_page.dart';
-// import 'package:home_work_3/pages/sign_up.dart';
+import 'firebase_options.dart';
 
-void main() {
-  DependecyInjection.init();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeFirebase();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
@@ -17,12 +16,23 @@ void main() {
   );
 }
 
+Future<void> initializeFirebase() async {
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e, stackTrace) {
+    print('Error initializing Firebase: $e');
+    print(stackTrace);
+  }
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: AuthPage(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }

@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:home_work_3/pages/about.dart';
-import 'package:home_work_3/pages/calc.dart';
+import 'package:midsem/pages/about.dart';
+import 'package:midsem/pages/calc.dart';
 import 'package:provider/provider.dart';
-import 'package:home_work_3/theme/theme_provider.dart';
-import 'package:home_work_3/components/button.dart';
+import 'package:midsem/theme/theme_provider.dart';
+import 'package:midsem/components/button.dart';
 
 class UserHome extends StatelessWidget {
+  signOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
@@ -15,6 +20,7 @@ class UserHome extends StatelessWidget {
             'Home',
             style: TextStyle(color: Colors.black),
           ),
+          actions: [IconButton(onPressed: signOut, icon: Icon(Icons.logout))],
           backgroundColor: Colors.grey,
           centerTitle: true,
         ),

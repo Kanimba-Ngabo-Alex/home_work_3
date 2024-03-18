@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_work_3/pages/navbar.dart';
-import 'package:home_work_3/pages/about.dart';
+import 'package:midsem/pages/navbar.dart';
+import 'package:midsem/pages/about.dart';
 import 'package:provider/provider.dart';
-import 'package:home_work_3/theme/theme_provider.dart';
+import 'package:midsem/theme/theme_provider.dart';
 
 class Calculator extends StatefulWidget {
   @override
